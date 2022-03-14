@@ -19,3 +19,14 @@
   border-radius: 5px;
   padding: 10px;
 }
+.todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20rem;
+  margin: 10px 0;
+}
+.completed{
+  text-decoration: line-through;
+  color: #ccc;
+}
