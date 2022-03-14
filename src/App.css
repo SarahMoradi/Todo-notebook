@@ -11,10 +11,11 @@
 }
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   width: 40rem;
+  align-items: center;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 4px;
+  padding: 10px;
 }
