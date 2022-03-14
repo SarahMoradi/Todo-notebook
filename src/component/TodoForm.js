@@ -2,9 +2,7 @@ import { useState } from "react";
 
 const TodoForm = (props) => {
   const [input, setInput] = useState("");
-
   const changeHandler = (e) => {
-    console.log(e.target.value);
     setInput(e.target.value);
   };
 
