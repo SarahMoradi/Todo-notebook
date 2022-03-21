@@ -1,14 +1,22 @@
 import "../App.css";
 
-const Header = (props) => {
+const Header = ({ uncompleted }) => {
+  if (!uncompleted)
+    return (
+      <div className="header-section no-task">
+        No task is available to be done !
+      </div>
+    );
   return (
-    <div className="header-section">
-      <p>
-        {" "}
-        <span>{props.uncompleted}</span>
-        {props.uncompleted === 0 ? " Todo" : " Todos"} is in the list !
-      </p>
-    </div>
+    <>
+          <div className="header-section">
+            <p>
+              {" "}
+              <span>{uncompleted}</span>
+              {uncompleted === 0 ? " Todo" : " Todos"} is in the list !
+            </p>
+          </div>
+        </>
   );
 };
 
