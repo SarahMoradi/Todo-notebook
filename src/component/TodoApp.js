@@ -1,9 +1,12 @@
+import Header from "./Header";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { useState } from "react";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
+
+  // const [uncompleted, setUncompleted] = useState(0);
 
   const addTodoHandler = (input) => {
     const newTodo = {
@@ -28,11 +31,28 @@ const TodoApp = () => {
     const filteredTodos = todos.filter((item) => item.id !== id);
     setTodos(filteredTodos);
   };
+  const updateTodo = (edit) => {
+    const index = todos.findIndex((item) => item.id === edit.id);
+    //clone
+    const selectedTodo = { ...todos[index] };
+    selectedTodo.text = edit.text;
+    const updatedTodos = [...todos];
+    updatedTodos[index] = selectedTodo;
+    setTodos(updatedTodos);
+    console.log(selectedTodo);
+  };
+
 
   return (
     <div className="container">
+      <Header uncompleted={todos.filter((t)=>t.isCompleted !== true).length} />
       <TodoForm addTodoHandler={addTodoHandler} />
-      <TodoList todos={todos} onComplete={completeTodo} onDelete={deleteTodo} />
+      <TodoList
+        todos={todos}
+        onComplete={completeTodo}
+        onDelete={deleteTodo}
+        onUpdateTodo={updateTodo}
+      />
     </div>
   );
 };

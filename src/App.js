@@ -1,5 +1,6 @@
 import './App.css';
 
+import Header from './component/Header';
 import TodoApp from './component/TodoApp';
 
 function App() {
