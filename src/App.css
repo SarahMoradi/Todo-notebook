@@ -87,6 +87,8 @@ input:focus {
   padding: 10px 20px;
   margin-bottom: 30px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 .no-task{
   background-color: rgb(35, 184, 35);

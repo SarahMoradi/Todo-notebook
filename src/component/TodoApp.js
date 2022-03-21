@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react";
+
 import Header from "./Header";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-import { useState } from "react";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([]);
-
-  // const [uncompleted, setUncompleted] = useState(0);
+  const [filteredTodos, setFilteredTodos] = useState([]);
+  const [status, setStatus] = useState([])
+  
+  useEffect(() => {
+    filterTodos(status);
+  }, [todos, status]);
 
   const addTodoHandler = (input) => {
     const newTodo = {
@@ -41,14 +46,30 @@ const TodoApp = () => {
     setTodos(updatedTodos);
     console.log(selectedTodo);
   };
-
+  const filterTodos = (status) => {
+    switch (status) {
+      case "Completed":
+        setFilteredTodos(todos.filter((t) => t.isCompleted));
+        break;
+      case "Uncompleted":
+        setFilteredTodos(todos.filter((t) => !t.isCompleted));
+        break;
+      default:
+        setFilteredTodos(todos);
+    }
+  };
 
   return (
     <div className="container">
-      <Header uncompleted={todos.filter((t)=>t.isCompleted !== true).length} />
+      <Header
+        filterTodos={filterTodos}
+        status={status}
+        setStatus={setStatus}
+        uncompleted={todos.filter((t) => t.isCompleted !== true).length}
+      />
       <TodoForm addTodoHandler={addTodoHandler} />
       <TodoList
-        todos={todos}
+        todos={filteredTodos}
         onComplete={completeTodo}
         onDelete={deleteTodo}
         onUpdateTodo={updateTodo}

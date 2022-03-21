@@ -1,6 +1,12 @@
 import "../App.css";
 
-const Header = ({ uncompleted }) => {
+const Header = ({ uncompleted, filterTodos, status, setStatus}) => {
+  
+  const changeHandler = (e) => {
+    setStatus(e.target.value);
+    filterTodos(e.target.value)
+  };
+
   if (!uncompleted)
     return (
       <div className="header-section no-task">
@@ -9,14 +15,21 @@ const Header = ({ uncompleted }) => {
     );
   return (
     <>
-          <div className="header-section">
-            <p>
-              {" "}
-              <span>{uncompleted}</span>
-              {uncompleted === 0 ? " Todo" : " Todos"} is in the list !
-            </p>
-          </div>
-        </>
+      <div className="header-section">
+        <p>
+          {" "}
+          <span>{uncompleted}</span>
+          {uncompleted === 0 ? " Todo" : " Todos"} is in the list !
+        </p>
+        <div>
+          <select onChange={changeHandler} value={status}>
+            <option value="All">All</option>
+            <option value="Completed">Completed</option>
+            <option value="Uncompleted">Uncompleted</option>
+          </select>
+        </div>
+      </div>
+    </>
   );
 };
 
